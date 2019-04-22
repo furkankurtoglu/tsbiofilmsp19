@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="LibreOffice 4.1.6.2 (Linux)">
+	<META NAME="CREATED" CONTENT="20190422;140800000000000">
+	<META NAME="CHANGEDBY" CONTENT="Furkan">
+	<META NAME="CHANGED" CONTENT="20190422;140800000000000">
+	<META NAME="AppVersion" CONTENT="16.0000">
+	<META NAME="DocSecurity" CONTENT="0">
+	<META NAME="HyperlinksChanged" CONTENT="false">
+	<META NAME="LinksUpToDate" CONTENT="false">
+	<META NAME="ScaleCrop" CONTENT="false">
+	<META NAME="ShareDoc" CONTENT="false">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { size: 8.5in 11in; margin: 1in }
+		P { margin-bottom: 0.08in; direction: ltr; widows: 2; orphans: 2 }
+		H2 { margin-top: 0.25in; margin-bottom: 0.08in; direction: ltr; page-break-inside: avoid; widows: 2; orphans: 2 }
+		H2.western { font-family: "Arial", serif; font-size: 16pt; font-weight: normal }
+		H2.cjk { font-family: "Arial"; font-size: 16pt; font-weight: normal }
+		H2.ctl { font-family: "Arial"; font-size: 16pt; font-weight: normal }
+		H4 { margin-top: 0.19in; margin-bottom: 0.06in; direction: ltr; color: #666666; page-break-inside: avoid; widows: 2; orphans: 2 }
+		H4.western { font-family: "Arial", serif; font-weight: normal }
+		H4.cjk { font-family: "Arial"; font-weight: normal }
+		H4.ctl { font-family: "Arial"; font-weight: normal }
+		A:link { so-language: zxx }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en" DIR="LTR">
+<P STYLE="margin-bottom: 0in; line-height: 100%; widows: 0; orphans: 0"><A NAME="_GoBack"></A>
+<FONT COLOR="#1a1a1a"><FONT FACE="Raleway, serif"><FONT SIZE=7 STYLE="font-size: 35pt"><B>Multispecies
+Biofilms on Wound Surface</B></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U><B>Description:</B></U></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.5in; margin-bottom: 0in">This
+tool aims to model two bacterial species which form a biofilm on the
+surface of a chronic wound. One species is <I>Pseudomonas Aeruginosa</I>
+which is an aerobic species while the other one <I>Staphylococcus
+Aureus</I> is anaerobic. Aerobic species provides a cover from
+atmospheric oxygen which has a negative effect on anaerobic cells.
+Each agent utilize glucose as a carbon source which is supplied at
+the bottom of the domain. This glucose are secreted by wound cells.
+In addition, air sources oxygen to the aerobic species. 
+</P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.5in; margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.5in; margin-bottom: 0in">The
+model is created to be used as a ENGR-599 class project. This model
+is developed by using agent-based modeling simulator PhysiCell [1].
+The user interface is provided by xml2jupyter package [2] and
+uploaded to NanoHub-nano-bio branch.</P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.5in; margin-bottom: 0in"><BR>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><IMG SRC="C:\Users\Furkan\Documents\GitHub\BiofilmSp19\doc\Biofilm.png" NAME="Biofilm.png"></P>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U><B>Chemical Compositions</B></U></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">	In this model there are
+three bio-chemical entities, which are glucose, oxygen, and ECM. We
+modeled a vertical environment where bottom two layers of voxels have
+wound cells while rest of the upper surface in air. Glucose and
+oxygen diffuses voxels by an efficient chemical diffusion tool which
+is called BioFVM [3]. However, since the domain is not horizontal and
+BioFVM does not support different diffusion coefficients for
+different voxels, we are making corrections accordingly to not allow
+glucose diffusion to air. 
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">	</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">	The domain has two
+different voxel types which are Dirichlet Nodes and Non-Dirichlet
+Nodes. The Dirichlet nodes supply oxygen with a constant
+concentration. However, non-dirichlet nodes enables to diffuse
+chemicals. There are two scenarios to be non-Dirichlet nodes. The
+first type of non-dirichlet voxels are initialized at the bottom of
+the domain that has wound cells. But the other type is nodes that are
+converted from Dirichlet voxels. This conversion occurs by ECM level.
+If the concentration of ECM, which is secreted by bacterial species,
+are greater than 1 mol, it became non-Dirichlet node which allows
+diffusion. 
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><I><U>Oxygen:</U></I></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">	This chemical is
+important for aerobic growth. Because it is sourced by air, dirichlet
+nodes are important for oxygen. Dirichlet boundary condition is
+defined as 20 mmHg. Diffusion length is 100 micro meter.</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><I><U>Glucose:</U></I></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">	</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">	Glucose is important for
+both species in the generic energy equation. Wound cells secrete
+glucose with 10 mol/min rate and 10 mol saturation density. Secreted
+glucose diffuses through non-Dirichlet nodes to source bacterial
+cells. 
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><I><U>ECM:</U></I></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">	ECM is the backbone of
+structure and a decision-maker biological entity for non-Dirichlet
+voxels, which has a very small diffusion length as 0.1 micrometer.
+ECM is secreted by bacterial cells.</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U><B>Agent Cells</B></U></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="text-indent: 0.5in; margin-bottom: 0in">Bacterial
+cells are really small (1 micron diameter), so it poses a difficult
+in visualization when it is compared to wound cells. Furthermore,
+simulating bacterial cells with their actual size would result in
+very large number of cells, hence increasing computational cost.
+Thus, our bacterial colonies are of same size as that of wound cells
+for simplicity. They can be considered as collection of  100
+bacterial cells in one species micro-colony. But it is assumed that
+one colony can include one type of bacteria.</P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><I><U><B>Key features in agents</B></U></I></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><I>Birth and Death</I></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">	Wound cells do not have
+any growth or death rule but bacterial cells can proliferate or die
+according to one generic energy equation.</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><IMG SRC="Description_Hand-Out_html_9ba6c1dd.gif" NAME="image1.gif" ALIGN=BOTTOM HSPACE=12 VSPACE=12 WIDTH=624 HEIGHT=43 BORDER=0></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><I><B>b</B></I><I>:
+</I>energy creation rate (1/min)</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">alpha: energy creation rate
+modifier for aerobic species (dimensionless)</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">phi: energy
+creation rate modulator for aerobic species (dimensionless)</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">beta: energy creation rate
+modifier for anaerobic species (dimensionless)</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">chi: energy creation rate
+modulator for anaerobic species (dimensionless)</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">gamma: energy usage rate
+modulator for both species (dimensionless)</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><I>d</I>: energy usage
+rate (1/min)</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">rho: energy penalty for
+anaerobic species (dimensionless)</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<TABLE WIDTH=624 CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=74>
+	<COL WIDTH=75>
+	<COL WIDTH=75>
+	<COL WIDTH=75>
+	<COL WIDTH=75>
+	<COL WIDTH=75>
+	<COL WIDTH=74>
+	<TR VALIGN=TOP>
+		<TD WIDTH=74 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			Species</P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER>alpha</P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER>beta</P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER>gamma</P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER><I>ɸ</I></P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER>chi</P>
+		</TD>
+		<TD WIDTH=74 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER>rho</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=74 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			Aerobic</P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			1</P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			0</P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			0.5</P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			1</P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			1</P>
+		</TD>
+		<TD WIDTH=74 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			0.1</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=74 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			Anaerobic</P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			0</P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			1</P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			0.5</P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			1</P>
+		</TD>
+		<TD WIDTH=75 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			2</P>
+		</TD>
+		<TD WIDTH=74 BGCOLOR="#ffffff" STYLE="border: 1.00pt solid #000001; padding: 0.07in">
+			<P ALIGN=CENTER STYLE="border: none; padding: 0in; widows: 0; orphans: 0">
+			1</P>
+		</TD>
+	</TR>
+</TABLE>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0in">Both species are
+non-motile as we assume that they are big colonies and they do not
+cooperatively move to somewhere. In addition, wound cells are
+non-movable which not allowing bacterial cells pushing the wound
+cells.</P>
+<P STYLE="margin-bottom: 0in; border: none; padding: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><I>Agent types</I></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Wound Cells(black cells)</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">These are non-movable cells
+		present on the bottom surface through simulation. They are acting
+		as glucose source.  They are colored black in simulation</P>
+	</UL>
+	<LI><P STYLE="margin-bottom: 0in">Staphylococcus Aureus
+	(Anaerobe)(Red Cell)</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">Bacterial cells that can only
+		survive if they are surrounded by Aerobic cells.</P>
+	</UL>
+	<LI><P STYLE="margin-bottom: 0in">Pseudomonas Aeruginosa
+	(Aerobe)(Blue Cells)</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">These cells secrete ECM in
+		environment.They uptake glucose and oxygen from the environment</P>
+	</UL>
+</UL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><U><B>Tool Instructions</B></U></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Modify the core parameters in the
+	tool, such as, domain size, saving options, simulation</P>
+</UL>
+<P STYLE="margin-bottom: 0in">time. 
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Change the model parameters
+	accordingly.</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in">For the seeding method: You can
+		use 4 options for seeding</P>
+		<UL>
+			<LI><P STYLE="margin-bottom: 0in">vertical: Seeding species side
+			by side</P>
+			<LI><P STYLE="margin-bottom: 0in">horizontal: Seeding species on
+			top of them</P>
+			<LI><P STYLE="margin-bottom: 0in">random: Randomly seeding cells</P>
+			<LI><P STYLE="margin-bottom: 0in">box: Seeding aerobe that covers</P>
+		</UL>
+	</UL>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<H4 CLASS="western" STYLE="margin-top: 0.17in; margin-bottom: 0.04in; background: #fafafa; line-height: 120%; page-break-inside: auto; page-break-after: auto"><A NAME="_ihh37hotjgrf"></A>
+<FONT COLOR="#1f2122"><FONT SIZE=3 STYLE="font-size: 11pt">References</FONT></FONT></H4>
+<H2 CLASS="western" STYLE="margin-top: 0in; margin-bottom: 0.63in; line-height: 120%; page-break-inside: auto; page-break-after: auto">
+<FONT COLOR="#696969"><FONT SIZE=3 STYLE="font-size: 11pt">[1]
+Ghaffarizadeh A, Heiland R, Friedman SH, Mumenthaler SM, Macklin P
+(2018) PhysiCell: An open source physics-based cell simulator for 3-D
+multicellular systems. </FONT></FONT><FONT COLOR="#696969"><FONT SIZE=3 STYLE="font-size: 11pt"><I>PLoS
+Comput Biol</I></FONT></FONT><FONT COLOR="#696969"><FONT SIZE=3 STYLE="font-size: 11pt">
+14(2): e1005991. </FONT></FONT><A HREF="https://doi.org/10.1371/journal.pcbi.1005991"><FONT COLOR="#61899e"><FONT SIZE=3 STYLE="font-size: 11pt"><U>https://doi.org/10.1371/journal.pcbi.1005991</U></FONT></FONT></A></H2>
+<H2 CLASS="western" STYLE="margin-top: 0.17in; margin-bottom: 0.63in; line-height: 120%; page-break-inside: auto; page-break-after: auto"><A NAME="_oo89or3ux4tc"></A>
+<FONT COLOR="#696969"><FONT SIZE=3 STYLE="font-size: 11pt">[2]
+Heiland R, Mishler D, Zhang T, Bower E, Macklin P (2019, in
+preparation) Xml2jupyter: Mapping parameters between XML and Jupyter
+widgets. </FONT></FONT><FONT COLOR="#696969"><FONT SIZE=3 STYLE="font-size: 11pt"><I>J
+Open Source Software</I></FONT></FONT><FONT COLOR="#696969"><FONT SIZE=3 STYLE="font-size: 11pt">.
+</FONT></FONT>
+</H2>
+<H2 CLASS="western" STYLE="margin-top: 0.17in; margin-bottom: 0.63in; line-height: 120%; page-break-inside: auto; page-break-after: auto"><A NAME="_gw5dg1yl3wjh"></A>
+<FONT COLOR="#696969"><FONT SIZE=3 STYLE="font-size: 11pt">[3]
+Ghaffarizadeh A, Friedman SH, Macklin P (2016) BioFVM: an efficient,
+parallelized diffusive transport solver for 3-D biological
+simulations. </FONT></FONT><FONT COLOR="#696969"><FONT SIZE=3 STYLE="font-size: 11pt"><I>Bioinformatics
+</I></FONT></FONT><FONT COLOR="#696969"><FONT SIZE=3 STYLE="font-size: 11pt">32(8):1256-8.
+</FONT></FONT><A HREF="https://doi.org/10.1093/bioinformatics/btv730"><FONT COLOR="#61899e"><FONT SIZE=3 STYLE="font-size: 11pt"><U>https://doi.org/10.1093/bioinformatics/btv730</U></FONT></FONT></A></H2>
+<H2 CLASS="western" STYLE="margin-top: 0.17in; margin-bottom: 0.63in; line-height: 120%; page-break-inside: auto; page-break-after: auto"><A NAME="_n4znd4nh7yf9"></A>
+<FONT COLOR="#696969"> </FONT>
+</H2>
+</BODY>
+</HTML>
